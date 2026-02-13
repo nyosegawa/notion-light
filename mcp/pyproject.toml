@@ -1,0 +1,15 @@
+[project]
+name = "notion-light-mcp"
+version = "0.1.0"
+description = "Light version of Notion MCP server with compressed descriptions"
+requires-python = ">=3.10"
+dependencies = [
+    "fastmcp>=2.0.0",
+]
+
+[project.scripts]
+notion-light-mcp = "server:server.run"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

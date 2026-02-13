@@ -1,0 +1,509 @@
+{
+  "tools": [
+    {
+      "name": "notion_search",
+      "description": "Search Notion workspace and connected sources by semantic query. See notion-best-practices skill for usage details.",
+      "inputSchema": {
+        "properties": {
+          "query": {
+            "type": "string"
+          },
+          "query_type": {
+            "default": "internal",
+            "type": "string"
+          },
+          "data_source_url": {
+            "default": "",
+            "type": "string"
+          },
+          "page_url": {
+            "default": "",
+            "type": "string"
+          },
+          "teamspace_id": {
+            "default": "",
+            "type": "string"
+          },
+          "content_search_mode": {
+            "default": "",
+            "type": "string"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "type": "object",
+        "x-fastmcp-wrap-result": true
+      },
+      "_meta": {
+        "_fastmcp": {
+          "tags": []
+        }
+      }
+    },
+    {
+      "name": "notion_fetch",
+      "description": "Retrieve a Notion page or database by URL or ID. See notion-best-practices skill for usage details.",
+      "inputSchema": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "include_transcript": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "type": "object",
+        "x-fastmcp-wrap-result": true
+      },
+      "_meta": {
+        "_fastmcp": {
+          "tags": []
+        }
+      }
+    },
+    {
+      "name": "notion_create_pages",
+      "description": "Create one or more Notion pages in a database or standalone. See notion-best-practices skill for usage details.",
+      "inputSchema": {
+        "properties": {
+          "pages": {
+            "items": {},
+            "type": "array"
+          },
+          "parent_type": {
+            "default": "",
+            "type": "string"
+          },
+          "parent_id": {
+            "default": "",
+            "type": "string"
+          }
+        },
+        "required": [
+          "pages"
+        ],
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "type": "object",
+        "x-fastmcp-wrap-result": true
+      },
+      "_meta": {
+        "_fastmcp": {
+          "tags": []
+        }
+      }
+    },
+    {
+      "name": "notion_update_page",
+      "description": "Update a Notion page's properties or content. See notion-best-practices skill for usage details.",
+      "inputSchema": {
+        "properties": {
+          "page_id": {
+            "type": "string"
+          },
+          "command": {
+            "default": "update_properties",
+            "type": "string"
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": true,
+            "default": null
+          },
+          "new_str": {
+            "default": "",
+            "type": "string"
+          },
+          "selection_with_ellipsis": {
+            "default": "",
+            "type": "string"
+          },
+          "allow_deleting_content": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "page_id"
+        ],
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "type": "object",
+        "x-fastmcp-wrap-result": true
+      },
+      "_meta": {
+        "_fastmcp": {
+          "tags": []
+        }
+      }
+    },
+    {
+      "name": "notion_create_database",
+      "description": "Create a new Notion database with specified property schema. See notion-best-practices skill for usage details.",
+      "inputSchema": {
+        "properties": {
+          "properties": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "parent_page_id": {
+            "default": "",
+            "type": "string"
+          }
+        },
+        "required": [
+          "properties"
+        ],
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "type": "object",
+        "x-fastmcp-wrap-result": true
+      },
+      "_meta": {
+        "_fastmcp": {
+          "tags": []
+        }
+      }
+    },
+    {
+      "name": "notion_update_data_source",
+      "description": "Update a Notion data source's properties, schema, or name. See notion-best-practices skill for usage details.",
+      "inputSchema": {
+        "properties": {
+          "data_source_id": {
+            "type": "string"
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": true,
+            "default": null
+          },
+          "in_trash": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "data_source_id"
+        ],
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "type": "object",
+        "x-fastmcp-wrap-result": true
+      },
+      "_meta": {
+        "_fastmcp": {
+          "tags": []
+        }
+      }
+    },
+    {
+      "name": "notion_query_database_view",
+      "description": "Query data from a Notion database using a view's filters and sorts. See notion-best-practices skill for usage details.",
+      "inputSchema": {
+        "properties": {
+          "view_url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "view_url"
+        ],
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "type": "object",
+        "x-fastmcp-wrap-result": true
+      },
+      "_meta": {
+        "_fastmcp": {
+          "tags": []
+        }
+      }
+    },
+    {
+      "name": "notion_create_comment",
+      "description": "Add a comment to a Notion page. See notion-best-practices skill for usage details.",
+      "inputSchema": {
+        "properties": {
+          "page_id": {
+            "type": "string"
+          },
+          "rich_text": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "page_id",
+          "rich_text"
+        ],
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "type": "object",
+        "x-fastmcp-wrap-result": true
+      },
+      "_meta": {
+        "_fastmcp": {
+          "tags": []
+        }
+      }
+    },
+    {
+      "name": "notion_get_comments",
+      "description": "Get all comments of a Notion page. See notion-best-practices skill for usage details.",
+      "inputSchema": {
+        "properties": {
+          "page_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "page_id"
+        ],
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "type": "object",
+        "x-fastmcp-wrap-result": true
+      },
+      "_meta": {
+        "_fastmcp": {
+          "tags": []
+        }
+      }
+    },
+    {
+      "name": "notion_move_pages",
+      "description": "Move Notion pages or databases to a new parent. See notion-best-practices skill for usage details.",
+      "inputSchema": {
+        "properties": {
+          "page_or_database_ids": {
+            "items": {},
+            "type": "array"
+          },
+          "new_parent_type": {
+            "default": "page_id",
+            "type": "string"
+          },
+          "new_parent_id": {
+            "default": "",
+            "type": "string"
+          }
+        },
+        "required": [
+          "page_or_database_ids"
+        ],
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "type": "object",
+        "x-fastmcp-wrap-result": true
+      },
+      "_meta": {
+        "_fastmcp": {
+          "tags": []
+        }
+      }
+    },
+    {
+      "name": "notion_duplicate_page",
+      "description": "Duplicate a Notion page asynchronously. See notion-best-practices skill for usage details.",
+      "inputSchema": {
+        "properties": {
+          "page_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "page_id"
+        ],
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "type": "object",
+        "x-fastmcp-wrap-result": true
+      },
+      "_meta": {
+        "_fastmcp": {
+          "tags": []
+        }
+      }
+    },
+    {
+      "name": "notion_get_teams",
+      "description": "List teams (teamspaces) in the Notion workspace. See notion-best-practices skill for usage details.",
+      "inputSchema": {
+        "properties": {
+          "query": {
+            "default": "",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "type": "object",
+        "x-fastmcp-wrap-result": true
+      },
+      "_meta": {
+        "_fastmcp": {
+          "tags": []
+        }
+      }
+    },
+    {
+      "name": "notion_get_users",
+      "description": "List users in the Notion workspace. See notion-best-practices skill for usage details.",
+      "inputSchema": {
+        "properties": {
+          "query": {
+            "default": "",
+            "type": "string"
+          },
+          "user_id": {
+            "default": "",
+            "type": "string"
+          },
+          "start_cursor": {
+            "default": "",
+            "type": "string"
+          },
+          "page_size": {
+            "default": 100,
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "type": "object",
+        "x-fastmcp-wrap-result": true
+      },
+      "_meta": {
+        "_fastmcp": {
+          "tags": []
+        }
+      }
+    }
+  ]
+}
